@@ -12,11 +12,11 @@ public class Display {
         this.lastDisplayed = "Error, empty barcode!";
     }
 
-    public void displayProductNotFound(String barcode) {
+    public void displayProductNotFound(Barcode barcode) {
         this.lastDisplayed = "No price available for item " + barcode;
     }
 
-    public void displayPrice(String text) {
-        this.lastDisplayed = text;
+    public void displayPrice(Price price) {
+        this.lastDisplayed = price.toString();
     }
 }

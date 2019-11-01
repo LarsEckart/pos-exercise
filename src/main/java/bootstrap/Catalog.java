@@ -1,19 +1,17 @@
 package bootstrap;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class Catalog {
 
-    private final Map<String, String> pricesByBarcode;
+    private final Map<Barcode, Price> pricesByBarcode;
 
-    public Catalog(List<Item> pricesByBarcode) {
-        this.pricesByBarcode = pricesByBarcode.stream().collect(Collectors.toMap(Item::getBarcode, Item::getPrice));
+    public Catalog(Map<Barcode, Price> pricesByBarcode) {
+        this.pricesByBarcode = pricesByBarcode;
     }
 
-    public Optional<String> priceFor(String barcode) {
+    public Optional<Price> priceFor(Barcode barcode) {
         return Optional.ofNullable(pricesByBarcode.get(barcode));
     }
 }

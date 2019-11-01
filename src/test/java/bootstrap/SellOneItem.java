@@ -1,6 +1,6 @@
 package bootstrap;
 
-import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -21,38 +21,38 @@ class SellOneItem {
 
         @BeforeEach
         void setUp() {
-            var catalog = new Catalog(List.of(
-                    new Item("12345", "3€"),
-                    new Item("23456", "5€"),
-                    new Item("34567", "10€")));
+            var catalog = new Catalog(Map.of(
+                    Barcode.parse("12345"), new Price(3),
+                    Barcode.parse("23456"), new Price(5),
+                    Barcode.parse("34567"), new Price(10)));
             display = new Display();
             cashRegister = new CashRegister(display, catalog);
         }
 
         @Test
         void scan_one_product_displays_price() {
-            cashRegister.onBarcode("12345");
+            cashRegister.onBarcode(Barcode.parse("12345"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("3€");
+            assertThat(display.lastDisplayed()).isEqualTo("3.0");
         }
 
         @Test
         void scan_another_product_displays_price() {
-            cashRegister.onBarcode("23456");
+            cashRegister.onBarcode(Barcode.parse("23456"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("5€");
+            assertThat(display.lastDisplayed()).isEqualTo("5.0");
         }
 
         @Test
         void scan_yet_another_product_displays_price() {
-            cashRegister.onBarcode("34567");
+            cashRegister.onBarcode(Barcode.parse("34567"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("10€");
+            assertThat(display.lastDisplayed()).isEqualTo("10.0");
         }
 
         @Test
         void scan_item_for_which_we_dont_have_price() {
-            cashRegister.onBarcode("99999");
+            cashRegister.onBarcode(Barcode.parse("99999"));
 
             assertThat(display.lastDisplayed()).isEqualTo("No price available for item 99999");
         }
@@ -64,7 +64,7 @@ class SellOneItem {
         display = new Display();
         cashRegister = new CashRegister(display, null);
 
-        cashRegister.onBarcode("");
+        cashRegister.onBarcode(Barcode.parse(""));
 
         assertThat(display.lastDisplayed()).isEqualTo("Error, empty barcode!");
     }

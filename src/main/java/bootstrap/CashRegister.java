@@ -10,7 +10,7 @@ public class CashRegister {
         this.catalog = catalog;
     }
 
-    public void onBarcode(String barcode) {
+    public void onBarcode(Barcode barcode) {
         // SMELL: refused request? move up call stack?
         if (barcode.isEmpty()) {
             display.displayEmptyProductMessage();
