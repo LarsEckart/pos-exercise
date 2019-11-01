@@ -2,7 +2,7 @@ package bootstrap;
 
 public class CashRegister {
     private final Display display;
-    private Catalog catalog;
+    private final Catalog catalog;
 
     public CashRegister(Display display, Catalog catalog) {
         this.display = display;

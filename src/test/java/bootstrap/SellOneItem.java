@@ -43,4 +43,11 @@ class SellOneItem {
 
         assertThat(display.lastDisplayed()).isEqualTo("10€");
     }
+
+    @Test
+    void scan_item_for_which_we_dont_have_price() {
+        cashRegister.onBarcode("00000");
+
+        assertThat(display.lastDisplayed()).isEqualTo("No price available");
+    }
 }

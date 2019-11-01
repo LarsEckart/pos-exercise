@@ -12,6 +12,6 @@ public class Catalog {
     }
 
     public String priceFor(String barcode) {
-    return c.get(barcode);
+        return c.getOrDefault(barcode, "No price available");
     }
 }
