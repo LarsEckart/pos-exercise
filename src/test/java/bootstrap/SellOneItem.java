@@ -1,8 +1,12 @@
 package bootstrap;
 
-import org.junit.jupiter.api.*;
-
 import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +25,7 @@ class SellOneItem {
                     new Item("12345", "3€"),
                     new Item("23456", "5€"),
                     new Item("34567", "10€")));
-            display = new ConsoleDisplay();
+            display = new Display();
             cashRegister = new CashRegister(display, catalog);
         }
 
@@ -57,7 +61,7 @@ class SellOneItem {
     @Test
     void empty_barcode_returns_error_message() {
         // SMELL: refused request? move up call stack?
-        display = new ConsoleDisplay();
+        display = new Display();
         cashRegister = new CashRegister(display, null);
 
         cashRegister.onBarcode("");

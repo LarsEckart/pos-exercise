@@ -1,6 +1,7 @@
 package bootstrap;
 
 public class CashRegister {
+
     private final Display display;
     private final Catalog catalog;
 

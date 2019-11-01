@@ -1,19 +1,22 @@
 package bootstrap;
 
-public interface Display {
-    public String lastDisplayed();
+public class Display {
 
-    void show(String text);
+    private String lastDisplayed;
 
-    default void displayEmptyProductMessage() {
-        show("Error, empty barcode!");
+    public String lastDisplayed() {
+        return lastDisplayed;
     }
 
-    default void displayProductNotFound(String barcode) {
-        show("No price available for item " + barcode);
+    public void displayEmptyProductMessage() {
+        this.lastDisplayed = "Error, empty barcode!";
     }
 
-    default void displayPrice(String text) {
-        show(text);
+    public void displayProductNotFound(String barcode) {
+        this.lastDisplayed = "No price available for item " + barcode;
+    }
+
+    public void displayPrice(String text) {
+        this.lastDisplayed = text;
     }
 }

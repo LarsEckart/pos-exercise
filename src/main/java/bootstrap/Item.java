@@ -1,6 +1,7 @@
 package bootstrap;
 
 public class Item {
+
     private final String barcode;
     private final String price;
 
