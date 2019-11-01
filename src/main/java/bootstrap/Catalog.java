@@ -5,13 +5,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Catalog {
 
-    private final Map<String, String> c = new ConcurrentHashMap<>();
+    private final Map<String, String> pricesByBarcode = new ConcurrentHashMap<>();
 
     public void add(Item item) {
-        c.put(item.getBarcode(), item.getPrice());
+        pricesByBarcode.put(item.getBarcode(), item.getPrice());
     }
 
     public String priceFor(String barcode) {
-        return c.getOrDefault(barcode, "No price available for item " + barcode);
+        return pricesByBarcode.getOrDefault(barcode, "No price available for item " + barcode);
     }
 }

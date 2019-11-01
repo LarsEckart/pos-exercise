@@ -15,7 +15,7 @@ class SellOneItem {
 
     @BeforeEach
     void setUp() {
-        Catalog catalog = new Catalog();
+        var catalog = new Catalog();
         catalog.add(new Item("12345", "3€"));
         catalog.add(new Item("23456", "5€"));
         catalog.add(new Item("34567", "10€"));
