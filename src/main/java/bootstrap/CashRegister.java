@@ -10,6 +10,7 @@ public class CashRegister {
     }
 
     public void onBarcode(String barcode) {
+        // SMELL: refused request? move up call stack?
         if (barcode.isEmpty()) {
             display.show("Error, empty barcode!");
             return;

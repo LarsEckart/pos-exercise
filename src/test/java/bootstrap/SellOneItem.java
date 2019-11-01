@@ -1,10 +1,7 @@
 package bootstrap;
 
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,55 +12,53 @@ class SellOneItem {
     private Display display;
     private CashRegister cashRegister;
 
-    @Test
-    void scan_one_product_displays_price() {
-        var catalog = new Catalog(Collections.singletonList(new Item("12345", "3€")));
-        display = new ConsoleDisplay();
-        cashRegister = new CashRegister(display, catalog);
+    @Nested
+    class happy_path {
 
-        cashRegister.onBarcode("12345");
+        @BeforeEach
+        void setUp() {
+            var catalog = new Catalog(List.of(
+                    new Item("12345", "3€"),
+                    new Item("23456", "5€"),
+                    new Item("34567", "10€")));
+            display = new ConsoleDisplay();
+            cashRegister = new CashRegister(display, catalog);
+        }
 
-        assertThat(display.lastDisplayed()).isEqualTo("3€");
-    }
+        @Test
+        void scan_one_product_displays_price() {
+            cashRegister.onBarcode("12345");
 
-    @Test
-    void scan_another_product_displays_price() {
-        var catalog = new Catalog(Collections.singletonList(new Item("23456", "5€")));
-        display = new ConsoleDisplay();
-        cashRegister = new CashRegister(display, catalog);
+            assertThat(display.lastDisplayed()).isEqualTo("3€");
+        }
 
-        cashRegister.onBarcode("23456");
+        @Test
+        void scan_another_product_displays_price() {
+            cashRegister.onBarcode("23456");
 
-        assertThat(display.lastDisplayed()).isEqualTo("5€");
-    }
+            assertThat(display.lastDisplayed()).isEqualTo("5€");
+        }
 
-    @Test
-    void scan_yet_another_product_displays_price() {
-        var catalog = new Catalog(Collections.singletonList(new Item("34567", "10€")));
-        display = new ConsoleDisplay();
-        cashRegister = new CashRegister(display, catalog);
+        @Test
+        void scan_yet_another_product_displays_price() {
+            cashRegister.onBarcode("34567");
 
-        cashRegister.onBarcode("34567");
+            assertThat(display.lastDisplayed()).isEqualTo("10€");
+        }
 
-        assertThat(display.lastDisplayed()).isEqualTo("10€");
-    }
+        @Test
+        void scan_item_for_which_we_dont_have_price() {
+            cashRegister.onBarcode("99999");
 
-    @Test
-    void scan_item_for_which_we_dont_have_price() {
-        var catalog = new Catalog(Collections.emptyList());
-        display = new ConsoleDisplay();
-        cashRegister = new CashRegister(display, catalog);
-
-        cashRegister.onBarcode("12345");
-
-        assertThat(display.lastDisplayed()).isEqualTo("No price available for item 12345");
+            assertThat(display.lastDisplayed()).isEqualTo("No price available for item 99999");
+        }
     }
 
     @Test
     void empty_barcode_returns_error_message() {
-        var catalog = new Catalog(Collections.emptyList());
+        // SMELL: refused request? move up call stack?
         display = new ConsoleDisplay();
-        cashRegister = new CashRegister(display, catalog);
+        cashRegister = new CashRegister(display, null);
 
         cashRegister.onBarcode("");
 
