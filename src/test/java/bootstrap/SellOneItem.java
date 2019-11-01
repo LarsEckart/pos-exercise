@@ -13,7 +13,9 @@ class SellOneItem {
     void scan_one_product_displays_price() {
         Display display = new ConsoleDisplay();
         CashRegister cashRegister = new CashRegister(display);
+
         cashRegister.onBarcode("12345");
+
         assertThat(display.lastDisplayed()).isEqualTo("3€");
     }
 }

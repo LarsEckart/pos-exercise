@@ -1,11 +1,13 @@
 package bootstrap;
 
 public class CashRegister {
-    public CashRegister(Display display) {
+    private final Display display;
 
+    public CashRegister(Display display) {
+        this.display = display;
     }
 
     public void onBarcode(String barcode) {
-
+        display.show("3€");
     }
 }
