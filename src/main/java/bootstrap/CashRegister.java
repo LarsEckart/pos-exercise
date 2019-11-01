@@ -2,19 +2,14 @@ package bootstrap;
 
 public class CashRegister {
     private final Display display;
+    private Catalog catalog;
 
-    public CashRegister(Display display) {
+    public CashRegister(Display display, Catalog catalog) {
         this.display = display;
+        this.catalog = catalog;
     }
 
     public void onBarcode(String barcode) {
-        if ("12345".equalsIgnoreCase(barcode)) {
-            display.show("3€");
-            return;
-        } else if ("23456".equalsIgnoreCase(barcode)) {
-            display.show("5€");
-            return;
-        }
-        display.show("10€");
+        display.show(catalog.priceFor(barcode));
     }
 }
