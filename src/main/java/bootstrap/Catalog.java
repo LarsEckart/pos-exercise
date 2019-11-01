@@ -2,6 +2,7 @@ package bootstrap;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Catalog {
@@ -12,7 +13,7 @@ public class Catalog {
         this.pricesByBarcode = pricesByBarcode.stream().collect(Collectors.toMap(Item::getBarcode, Item::getPrice));
     }
 
-    public String priceFor(String barcode) {
-        return pricesByBarcode.getOrDefault(barcode, "No price available for item " + barcode);
+    public Optional<String> priceFor(String barcode) {
+        return Optional.ofNullable(pricesByBarcode.get(barcode));
     }
 }

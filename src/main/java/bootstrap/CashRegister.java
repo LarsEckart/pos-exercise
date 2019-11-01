@@ -12,10 +12,12 @@ public class CashRegister {
     public void onBarcode(String barcode) {
         // SMELL: refused request? move up call stack?
         if (barcode.isEmpty()) {
-            display.show("Error, empty barcode!");
+            display.displayEmptyProductMessage();
             return;
         }
 
-        display.show(catalog.priceFor(barcode));
+        catalog.priceFor(barcode).ifPresentOrElse(
+                display::displayPrice,
+                () -> display.displayProductNotFound(barcode));
     }
 }
