@@ -8,6 +8,10 @@ public class CashRegister {
     }
 
     public void onBarcode(String barcode) {
-        display.show("3€");
+        if ("12345".equalsIgnoreCase(barcode)) {
+            display.show("3€");
+            return;
+        }
+        display.show("5€");
     }
 }
