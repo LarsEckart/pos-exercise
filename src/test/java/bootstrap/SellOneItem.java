@@ -50,4 +50,11 @@ class SellOneItem {
 
         assertThat(display.lastDisplayed()).isEqualTo("No price available for item 00000");
     }
+
+    @Test
+    void empty_barcode_returns_error_message() {
+        cashRegister.onBarcode("");
+
+        assertThat(display.lastDisplayed()).isEqualTo("Error, empty barcode!");
+    }
 }

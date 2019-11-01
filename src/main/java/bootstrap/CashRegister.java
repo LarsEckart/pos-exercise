@@ -10,6 +10,10 @@ public class CashRegister {
     }
 
     public void onBarcode(String barcode) {
-        display.show(catalog.priceFor(barcode));
+        if (barcode.isEmpty()) {
+            display.show("Error, empty barcode!");
+        } else {
+            display.show(catalog.priceFor(barcode));
+        }
     }
 }
