@@ -21,4 +21,8 @@ public class CashRegister {
                 display::displayPrice,
                 () -> display.displayProductNotFound(barcode));
     }
+
+    public void onTotal() {
+        display.total();
+    }
 }

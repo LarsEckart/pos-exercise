@@ -19,4 +19,8 @@ public class Display {
     public void displayPrice(Price price) {
         this.lastDisplayed = price.toString();
     }
+
+    public void total() {
+        this.lastDisplayed = "No sale in progress. Try scanning a product";
+    }
 }
