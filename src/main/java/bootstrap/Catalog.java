@@ -1,14 +1,15 @@
 package bootstrap;
 
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class Catalog {
 
-    private final Map<String, String> pricesByBarcode = new ConcurrentHashMap<>();
+    private final Map<String, String> pricesByBarcode;
 
-    public void add(Item item) {
-        pricesByBarcode.put(item.getBarcode(), item.getPrice());
+    public Catalog(List<Item> pricesByBarcode) {
+        this.pricesByBarcode = pricesByBarcode.stream().collect(Collectors.toMap(Item::getBarcode, Item::getPrice));
     }
 
     public String priceFor(String barcode) {
