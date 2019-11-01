@@ -28,4 +28,14 @@ class SellOneItem {
 
         assertThat(display.lastDisplayed()).isEqualTo("5€");
     }
+
+    @Test
+    void scan_yet_another_product_displays_price() {
+        Display display = new ConsoleDisplay();
+        CashRegister cashRegister = new CashRegister(display);
+
+        cashRegister.onBarcode("34567");
+
+        assertThat(display.lastDisplayed()).isEqualTo("10€");
+    }
 }
