@@ -6,7 +6,7 @@ public class CashRegister {
 
     private final Display display;
     private final Catalog catalog;
-    private Price price;
+    private Price scannedPrice;
 
     public CashRegister(Display display, Catalog catalog) {
         this.display = display;
@@ -27,15 +27,15 @@ public class CashRegister {
 
     private Consumer<Price> priceFound() {
         return p -> {
-            price = p;
+            scannedPrice = p;
             display.displayPrice(p);
         };
     }
 
     public void onTotal() {
-        boolean saleNotInProgress = (price != null);
+        boolean saleNotInProgress = (scannedPrice != null);
         if (saleNotInProgress) {
-            display.displayTotalPurchase(price);
+            display.displayTotalPurchase(scannedPrice);
         } else {
             display.total();
         }

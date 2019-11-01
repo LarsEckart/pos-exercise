@@ -28,4 +28,15 @@ public class SellMultipleItems {
 
         assertThat(display.lastDisplayed()).isEqualTo("Total: 6.50");
     }
+
+    @Test
+    void one_item_not_found() {
+        Display display = new Display();
+        CashRegister cashRegister = new CashRegister(display, new Catalog(Map.of(Barcode.parse("12345"), new Price(6.50))));
+
+        cashRegister.onBarcode(Barcode.parse("99999"));
+        cashRegister.onTotal();
+
+        assertThat(display.lastDisplayed()).isEqualTo("No sale in progress. Try scanning a product");
+    }
 }
