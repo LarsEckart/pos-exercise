@@ -24,7 +24,7 @@ public class Display {
         this.lastDisplayed = "No sale in progress. Try scanning a product";
     }
 
-    public void displayTotalPurchase(String total) {
-        lastDisplayed = "Total: " + total;
+    public void displayTotalPurchase(Price total) {
+        lastDisplayed = "Total: " + total.toString();
     }
 }

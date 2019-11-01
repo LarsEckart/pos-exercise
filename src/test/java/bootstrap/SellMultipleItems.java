@@ -21,7 +21,7 @@ public class SellMultipleItems {
     @Test
     void one_item_found() {
         Display display = new Display();
-        CashRegister cashRegister = new CashRegister(display, new Catalog(Map.of(Barcode.parse("12345"), new Price(6.5))));
+        CashRegister cashRegister = new CashRegister(display, new Catalog(Map.of(Barcode.parse("12345"), new Price(6.50))));
         cashRegister.onBarcode(Barcode.parse("12345"));
 
         cashRegister.onTotal();

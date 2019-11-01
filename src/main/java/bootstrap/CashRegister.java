@@ -33,10 +33,11 @@ public class CashRegister {
     }
 
     public void onTotal() {
-        if (price == null) {
+        boolean saleNotInProgress = price == null;
+        if (saleNotInProgress) {
             display.total();
         } else {
-            display.displayTotalPurchase(price.toString());
+            display.displayTotalPurchase(price);
         }
     }
 }

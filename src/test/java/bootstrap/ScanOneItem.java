@@ -33,21 +33,21 @@ class ScanOneItem {
         void scan_one_product_displays_price() {
             cashRegister.onBarcode(Barcode.parse("12345"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("3.0");
+            assertThat(display.lastDisplayed()).isEqualTo("3.00");
         }
 
         @Test
         void scan_another_product_displays_price() {
             cashRegister.onBarcode(Barcode.parse("23456"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("5.0");
+            assertThat(display.lastDisplayed()).isEqualTo("5.00");
         }
 
         @Test
         void scan_yet_another_product_displays_price() {
             cashRegister.onBarcode(Barcode.parse("34567"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("10.0");
+            assertThat(display.lastDisplayed()).isEqualTo("10.00");
         }
 
         @Test
