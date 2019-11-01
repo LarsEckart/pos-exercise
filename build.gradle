@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'com.github.ben-manes.versions' version '0.27.0'
+    id 'jacoco'
+}
+
+repositories {
+    maven() {
+        url 'https://dl.bintray.com/mockito/maven/'
+        content {
+            includeGroup 'org.mockito'
+        }
+    }
+    mavenCentral()
+}
+
+dependencies {
+
+    def junitVersion = '5.5.2'
+    def mockitoVersion = '3.1.0'
+    def assertjVersion = '3.14.0'
+    def approvalVersion = '4.0.2'
+
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "com.approvaltests:approvaltests:${approvalVersion}"
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:all"
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
