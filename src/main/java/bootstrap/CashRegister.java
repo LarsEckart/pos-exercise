@@ -1,9 +1,12 @@
 package bootstrap;
 
+import java.util.function.Consumer;
+
 public class CashRegister {
 
     private final Display display;
     private final Catalog catalog;
+    private Price price;
 
     public CashRegister(Display display, Catalog catalog) {
         this.display = display;
@@ -18,11 +21,22 @@ public class CashRegister {
         }
 
         catalog.priceFor(barcode).ifPresentOrElse(
-                display::displayPrice,
+                priceFound(),
                 () -> display.displayProductNotFound(barcode));
     }
 
+    private Consumer<Price> priceFound() {
+        return p -> {
+            price = p;
+            display.displayPrice(p);
+        };
+    }
+
     public void onTotal() {
-        display.total();
+        if (price == null) {
+            display.total();
+        } else {
+            display.displayTotalPurchase(price.toString());
+        }
     }
 }
