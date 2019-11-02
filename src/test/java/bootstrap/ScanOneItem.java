@@ -2,6 +2,8 @@ package bootstrap;
 
 import java.util.Map;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -22,9 +24,9 @@ class ScanOneItem {
         @BeforeEach
         void setUp() {
             var catalog = new Catalog(Map.of(
-                    Barcode.parse("12345"), new Price(300),
-                    Barcode.parse("23456"), new Price(500),
-                    Barcode.parse("34567"), new Price(1000)));
+                    Barcode.parse("12345"), new Price(Money.ofMinor(CurrencyUnit.EUR, 300)),
+                    Barcode.parse("23456"), new Price(Money.ofMinor(CurrencyUnit.EUR, 500)),
+                    Barcode.parse("34567"), new Price(Money.ofMinor(CurrencyUnit.EUR, 1000))));
             display = new Display();
             cashRegister = new CashRegister(display, catalog);
         }

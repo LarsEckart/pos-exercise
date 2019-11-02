@@ -2,6 +2,8 @@ package bootstrap;
 
 import java.util.Map;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +24,7 @@ public class SellMultipleItems {
     void one_item_found() {
         Display display = new Display();
         CashRegister cashRegister = new CashRegister(display,
-                new Catalog(Map.of(Barcode.parse("12345"), new Price(650))));
+                new Catalog(Map.of(Barcode.parse("12345"), new Price(Money.ofMinor(CurrencyUnit.EUR, 650)))));
         cashRegister.onBarcode(Barcode.parse("12345"));
 
         cashRegister.onTotal();
@@ -34,7 +36,7 @@ public class SellMultipleItems {
     void one_item_not_found() {
         Display display = new Display();
         CashRegister cashRegister = new CashRegister(display,
-                new Catalog(Map.of(Barcode.parse("12345"), new Price(650))));
+                new Catalog(Map.of(Barcode.parse("12345"), new Price(Money.ofMinor(CurrencyUnit.EUR, 650)))));
 
         cashRegister.onBarcode(Barcode.parse("99999"));
         cashRegister.onTotal();

@@ -1,18 +1,17 @@
 package bootstrap;
 
-import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
 public class Price {
 
-    private int cents;
+    private Money money;
 
-    public Price(int value) {
-        this.cents = value;
+    public Price(Money money) {
+        this.money = money;
     }
 
     @Override
     public String toString() {
-        return Money.ofMinor(CurrencyUnit.EUR, cents).toString();
+        return money.toString();
     }
 }
