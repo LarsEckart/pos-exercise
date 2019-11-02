@@ -22,9 +22,9 @@ class ScanOneItem {
         @BeforeEach
         void setUp() {
             var catalog = new Catalog(Map.of(
-                    Barcode.parse("12345"), new Price(3),
-                    Barcode.parse("23456"), new Price(5),
-                    Barcode.parse("34567"), new Price(10)));
+                    Barcode.parse("12345"), new Price(300),
+                    Barcode.parse("23456"), new Price(500),
+                    Barcode.parse("34567"), new Price(1000)));
             display = new Display();
             cashRegister = new CashRegister(display, catalog);
         }
@@ -33,21 +33,21 @@ class ScanOneItem {
         void scan_one_product_displays_price() {
             cashRegister.onBarcode(Barcode.parse("12345"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("3.00");
+            assertThat(display.lastDisplayed()).isEqualTo("EUR 3.00");
         }
 
         @Test
         void scan_another_product_displays_price() {
             cashRegister.onBarcode(Barcode.parse("23456"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("5.00");
+            assertThat(display.lastDisplayed()).isEqualTo("EUR 5.00");
         }
 
         @Test
         void scan_yet_another_product_displays_price() {
             cashRegister.onBarcode(Barcode.parse("34567"));
 
-            assertThat(display.lastDisplayed()).isEqualTo("10.00");
+            assertThat(display.lastDisplayed()).isEqualTo("EUR 10.00");
         }
 
         @Test

@@ -21,18 +21,20 @@ public class SellMultipleItems {
     @Test
     void one_item_found() {
         Display display = new Display();
-        CashRegister cashRegister = new CashRegister(display, new Catalog(Map.of(Barcode.parse("12345"), new Price(6.50))));
+        CashRegister cashRegister = new CashRegister(display,
+                new Catalog(Map.of(Barcode.parse("12345"), new Price(650))));
         cashRegister.onBarcode(Barcode.parse("12345"));
 
         cashRegister.onTotal();
 
-        assertThat(display.lastDisplayed()).isEqualTo("Total: 6.50");
+        assertThat(display.lastDisplayed()).isEqualTo("Total: EUR 6.50");
     }
 
     @Test
     void one_item_not_found() {
         Display display = new Display();
-        CashRegister cashRegister = new CashRegister(display, new Catalog(Map.of(Barcode.parse("12345"), new Price(6.50))));
+        CashRegister cashRegister = new CashRegister(display,
+                new Catalog(Map.of(Barcode.parse("12345"), new Price(650))));
 
         cashRegister.onBarcode(Barcode.parse("99999"));
         cashRegister.onTotal();

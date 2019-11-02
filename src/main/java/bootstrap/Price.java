@@ -1,23 +1,18 @@
 package bootstrap;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 
 public class Price {
 
-    private double value;
+    private int cents;
 
-    public Price(double value) {
-        this.value = value;
+    public Price(int value) {
+        this.cents = value;
     }
 
-    @Override public String toString() {
-        NumberFormat f = NumberFormat.getInstance(Locale.US);
-        if (f instanceof DecimalFormat) {
-            ((DecimalFormat) f).setDecimalSeparatorAlwaysShown(true);
-            ((DecimalFormat) f).setMinimumFractionDigits(2);
-        }
-        return f.format(value);
+    @Override
+    public String toString() {
+        return Money.ofMinor(CurrencyUnit.EUR, cents).toString();
     }
 }
