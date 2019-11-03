@@ -1,12 +1,14 @@
 package bootstrap;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.function.Consumer;
 
 public class CashRegister {
 
     private final Display display;
     private final Catalog catalog;
-    private Price scannedPrice;
+    private Collection<Price> scannedPrices = new ArrayList<>();
 
     public CashRegister(Display display, Catalog catalog) {
         this.display = display;
@@ -27,17 +29,16 @@ public class CashRegister {
 
     private Consumer<Price> priceFound() {
         return p -> {
-            scannedPrice = p;
+            scannedPrices.add(p);
             display.displayPrice(p);
         };
     }
 
     public void onTotal() {
-        boolean saleNotInProgress = (scannedPrice != null);
-        if (saleNotInProgress) {
-            display.displayTotalPurchase(scannedPrice);
+        if (scannedPrices.isEmpty()) {
+            display.noSaleInProgress();
         } else {
-            display.total();
+            display.displayTotalPurchase(scannedPrices.iterator().next());
         }
     }
 }

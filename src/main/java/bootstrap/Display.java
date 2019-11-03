@@ -20,7 +20,7 @@ public class Display {
         this.lastDisplayed = price.toString();
     }
 
-    public void total() {
+    public void noSaleInProgress() {
         this.lastDisplayed = "No sale in progress. Try scanning a product";
     }
 

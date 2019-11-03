@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SellMultipleItems {
+class SellMultipleItems {
 
     @Test
     void zero_items() {
