@@ -15,12 +15,12 @@ repositories {
 }
 
 dependencies {
-    compile 'org.joda:joda-money:1.0.1'
+    implementation 'org.joda:joda-money:1.0.1'
 
-    def junitVersion = '5.5.2'
-    def mockitoVersion = '3.1.0'
-    def assertjVersion = '3.14.0'
-    def approvalVersion = '4.0.2'
+    def junitVersion = '5.7.1'
+    def mockitoVersion = '3.9.0'
+    def assertjVersion = '3.19.0'
+    def approvalVersion = '10.3.0'
 
     testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
